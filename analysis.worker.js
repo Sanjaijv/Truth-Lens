@@ -9,7 +9,6 @@ import { RiskScorer } from './tf/riskScore.js';
 
 console.log("Worker: Loaded (Prod Mode)");
 
-// Global Error Handler
 self.onerror = function (err) {
     console.error("Worker Global Error:", err);
     self.postMessage({
@@ -28,14 +27,11 @@ async function init(rootUrl) {
         console.log("Worker: Init called with rootUrl:", rootUrl);
         self.postMessage({ type: 'PROGRESS', status: 'Starting AI Engine...' });
 
-        // Load TF.js backend
         try {
             self.postMessage({ type: 'PROGRESS', status: 'Initializing GPU...' });
 
-            // Check if TF is loaded
             if (!tf) throw new Error("TensorFlow.js not loaded");
 
-            // Strictly WebGL
             await tf.setBackend('webgl');
             await tf.ready();
             console.log("Worker: TF Backend ready:", tf.getBackend());
@@ -45,13 +41,11 @@ async function init(rootUrl) {
             return;
         }
 
-        // Load Model
         self.postMessage({ type: 'PROGRESS', status: 'Loading Face Model...' });
         await loadFaceMeshModel(rootUrl);
 
         self.postMessage({ type: 'PROGRESS', status: 'Compiling Shaders...' });
 
-        // Init Logic Modules
         blink = new BlinkDetector();
         pulse = new PulseDetector();
         stability = new StabilityDetector();
@@ -66,7 +60,6 @@ async function init(rootUrl) {
     }
 }
 
-// Handle Messages
 self.onmessage = async (e) => {
     const msg = e.data;
 
@@ -84,16 +77,13 @@ self.onmessage = async (e) => {
 
 async function processFrame(pixels, width, height, timestamp) {
     try {
-        // Reconstruct ImageData from the received ArrayBuffer
         const data = new Uint8ClampedArray(pixels);
         const imageData = new ImageData(data, width, height);
 
         console.log("Worker: Processing frame", width, "x", height);
 
-        // 1. Detect Face (TFJS accepts ImageData)
         const faces = await detectFace(imageData);
 
-        // Default result
         let result = {
             found: false,
             timestamp: timestamp
@@ -105,12 +95,10 @@ async function processFrame(pixels, width, height, timestamp) {
 
             console.log("Worker: Face Found!");
 
-            // Run Benchmarks
             const blinkRes = blink.update(keypoints, timestamp);
             const stabilityRes = stability.update(keypoints);
             const pulseRes = pulse.update(imageData, keypoints, timestamp);
 
-            // Calculate Risk
             const riskRes = risk.calculate({
                 blink: (blinkRes && blinkRes.score) || 0.5,
                 pulse: (pulseRes && pulseRes.confidence) || 0.5,
@@ -124,19 +112,17 @@ async function processFrame(pixels, width, height, timestamp) {
                 pulse: pulseRes,
                 stability: stabilityRes,
                 risk: riskRes,
-                box: face.box // Return local box coords within the ROI if needed
+                box: face.box
             };
         } else {
             console.log("Worker: No face detected in this frame");
         }
 
-        // Send Result
         self.postMessage({ type: 'RESULT', data: result });
 
     } catch (err) {
         console.error("Worker Error:", err);
     } finally {
-        // Cleanup
     }
 
 }
