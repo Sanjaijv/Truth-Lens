@@ -1,0 +1,422 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* styles.css - Light Purple & Dark Blue Shadcn Theme */
+/* styles.css - Light Purple & Dark Blue Shadcn Theme */
+.truthlens-overlay {
+    position: fixed;
+    /* Fixed to viewport */
+    top: 20px;
+    /* "Under the extension icon" */
+    right: 20px;
+    z-index: 2147483647;
+    /* Max Z-Index */
+
+    /* Shadcn Dark Theme */
+    background-color: #020817;
+    /* Slate 950 */
+    color: #f8fafc;
+    /* Slate 50 */
+    border: 1px solid #1e293b;
+    /* Slate 800 */
+    border-radius: 20px;
+    /* 20px - Curvier look */
+
+    padding: 16px;
+    width: 280px;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.2s ease-out;
+}
+/* "Scanning" pulsing border effect - Light Purple */
+.truthlens-overlay.scanning {
+    border-color: #a855f7;
+    /* Purple 500 */
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+.truthlens-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+}
+.truthlens-title {
+    font-size: 14px;
+    font-weight: 600;
+    /* Gradient Text: Light Purple to Blue */
+    background: linear-gradient(to right, #c084fc, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.truthlens-minimize-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    /* Slate 400 */
+    cursor: pointer;
+    border-radius: 9999px;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.truthlens-minimize-btn:hover {
+    background: #1e293b;
+    color: #f8fafc;
+}
+.truthlens-status-container {
+    background: #0f172a;
+    /* Slate 900 */
+    border: 1px solid #1e293b;
+    border-radius: 12px;
+    /* 12px */
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.truthlens-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #64748b;
+}
+.truthlens-status-text {
+    font-size: 13px;
+    font-weight: 500;
+    text-transform: capitalize;
+}
+.truthlens-score {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: #94a3b8;
+    padding: 0 2px;
+}
+#tl-score-value {
+    color: #f8fafc;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+}
+/* Status Colors */
+.truthlens-status.safe .truthlens-indicator {
+    background-color: #10b981;
+    box-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+}
+.truthlens-status.safe .truthlens-status-text {
+    color: #10b981;
+}
+.truthlens-status.suspicious .truthlens-indicator {
+    background-color: #f59e0b;
+    box-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+.truthlens-status.suspicious .truthlens-status-text {
+    color: #f59e0b;
+}
+.truthlens-status.deepfake .truthlens-indicator {
+    background-color: #ef4444;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    animation: pulse-red 1s infinite;
+}
+.truthlens-status.deepfake .truthlens-status-text {
+    color: #ef4444;
+}
+/* Verdict Screen */
+.truthlens-verdict {
+    text-align: center;
+    padding: 20px 0;
+    margin: 10px 0;
+    background: #0f172a;
+    border-radius: 0.5rem;
+    border: 1px solid #1e293b;
+}
+.truthlens-verdict.safe {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.05);
+}
+.truthlens-verdict.suspicious {
+    border-color: rgba(245, 158, 11, 0.3);
+    background: rgba(245, 158, 11, 0.05);
+}
+.truthlens-verdict.deepfake {
+    border-color: rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.05);
+}
+.verdict-label {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+.verdict-score {
+    font-size: 13px;
+    color: #94a3b8;
+}
+/* Buttons (Shadcn Style) */
+.truthlens-btn-primary {
+    background: #a855f7;
+    /* Light Purple Primary */
+    color: white;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.truthlens-btn-primary:hover {
+    background: #9333ea;
+    /* Darker Purple */
+}
+.truthlens-btn-secondary {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #f8fafc;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+    border-radius: 9999px;
+    padding: 8px 16px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.truthlens-btn-secondary:hover {
+    background: #1e293b;
+}
+.truthlens-center-action {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+@keyframes pulse-red {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+/* Minimized State */
+.truthlens-overlay.minimized {
+    width: auto;
+    padding: 8px;
+    border-radius: 9999px;
+    gap: 0;
+}
+.truthlens-overlay.minimized .truthlens-header,
+.truthlens-overlay.minimized .truthlens-status-container,
+.truthlens-overlay.minimized .truthlens-score,
+.truthlens-overlay.minimized .truthlens-center-action {
+    display: none;
+}
+/* Sidebar Analysis Panel - Compact Box */
+div.truthlens-modal-overlay {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    width: 260px !important;
+    /* Compact width */
+    height: auto !important;
+    max-height: 90vh !important;
+    left: auto !important;
+    /* Override full screen */
+    bottom: auto !important;
+
+    background-color: #020817;
+    border: 1px solid #1e293b;
+    border-radius: 24px;
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.8);
+    z-index: 2147483647;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #f8fafc;
+    overflow: hidden;
+}
+.truthlens-modal-header {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    background: #020817;
+}
+.truthlens-modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    background: linear-gradient(to right, #c084fc, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.truthlens-modal-close-btn {
+    background: transparent;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+.truthlens-modal-close-btn:hover {
+    background: #1e293b;
+    color: white;
+    border-color: #ef4444;
+    /* Red border on hover for close */
+}
+.truthlens-video-wrapper {
+    position: relative;
+    width: 100% !important;
+    min-height: 140px !important;
+    /* Force visibility */
+    background: #000;
+    border-bottom: 1px solid #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.truthlens-mirror-video {
+    width: 100%;
+    height: 100%;
+}
+.truthlens-overlay-canvas {
+    position: relative;
+    max-width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+       object-fit: contain;
+    pointer-events: none;
+}
+.truthlens-modal-footer {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: #020817;
+    border-top: 1px solid #1e293b;
+}
+.truthlens-modal-status {
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.truthlens-modal-status.analyzing {
+    color: #60a5fa;
+    /* Blue */
+}
+.truthlens-modal-status.safe {
+    color: #10b981;
+    /* Green */
+}
+.truthlens-modal-status.fake {
+    color: #ef4444;
+    /* Red */
+}
+/* Error Alert Styles (Shadcn-inspired) */
+/* Error Alert Styles (Shadcn-inspired) */
+.truthlens-error-alert {
+    margin: 8px 12px;
+    padding: 12px;
+    background: rgba(239, 68, 68, 0.08);
+    border-radius: 16px;
+    border-left: 4px solid #ef4444;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    color: #f8fafc;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+.truthlens-error-icon {
+    flex-shrink: 0;
+    color: #ef4444;
+    margin-top: 1px;
+}
+.truthlens-error-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.truthlens-error-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fca5a5;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+}
+.truthlens-error-desc {
+    color: #cbd5e1;
+    font-size: 11px;
+    line-height: 1.4;
+    font-weight: 400;
+    opacity: 0.9;
+}
+/* Debug Console Styles */
+.truthlens-debug-console {
+    width: 100%;
+    height: 80px;
+    background: #020617;
+    /* Very dark slate */
+    border-top: 1px solid #1e293b;
+    color: #94a3b8;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    font-size: 10px;
+    padding: 10px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    line-height: 1.4;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+.truthlens-debug-console::-webkit-scrollbar {
+    width: 4px;
+}
+.truthlens-debug-console::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 2px;
+}
+/* Log Highlights */
+.tl-log-cors {
+    color: #fca5a5;
+    /* Light Red */
+    font-weight: 500;
+    background: rgba(239, 68, 68, 0.1);
+    padding: 0 2px;
+    border-radius: 2px;
+}
+.tl-log-error {
+    color: #ef4444;
+    /* Red */
+}
+.tl-log-warn {
+    color: #f59e0b;
+    /* Amber */
+}
+.tl-log-info {
+    color: #60a5fa;
+    /* Blue */
+}

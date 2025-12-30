@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "TruthLens – Anti-Deepfake Video Call Guard",
+  "version": "1.0",
+  "description": "Real-time deepfake detection overlay.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*/*"
+      ],
+      "js": [
+        "dist/content.js"
+      ],
+      "css": [
+        "dist/content.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "dist/*.js",
+        "dist/frame.html",
+        "tf/*.js",
+        "utils/*.js",
+        "overlay.js"
+      ],
+      "matches": [
+        "https://*/*"
+      ]
+    }
+  ],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; connect-src 'self' https://tfhub.dev https://storage.googleapis.com https://cdn.jsdelivr.net",
+    "content_scripts": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; worker-src 'self'; connect-src 'self' https://tfhub.dev https://storage.googleapis.com https://cdn.jsdelivr.net"
+  },
+  "action": {
+    "default_popup": "dist/popup.html"
+  }
+}

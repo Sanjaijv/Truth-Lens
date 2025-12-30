@@ -1,0 +1,29 @@
+{
+    "name": "truthlens-extension",
+    "version": "1.0.0",
+    "description": "Anti-Deepfake Browser Extension",
+    "type": "module",
+    "scripts": {
+        "build": "vite build -c vite.popup.config.js && vite build -c vite.content.config.js && vite build -c vite.worker.config.js"
+    },
+    "dependencies": {
+        "@mediapipe/face_mesh": "^0.4.1633559619",
+        "@radix-ui/react-slot": "^1.2.4",
+        "@tensorflow-models/face-landmarks-detection": "^1.0.5",
+        "@tensorflow/tfjs-backend-webgl": "^4.10.0",
+        "@tensorflow/tfjs-core": "^4.10.0",
+        "class-variance-authority": "^0.7.1",
+        "clsx": "^2.1.1",
+        "lucide-react": "^0.562.0",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "tailwind-merge": "^3.4.0"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^5.1.2",
+        "autoprefixer": "^10.4.23",
+        "postcss": "^8.5.6",
+        "tailwindcss": "^3.4.17",
+        "vite": "^4.4.5"
+    }
+}
