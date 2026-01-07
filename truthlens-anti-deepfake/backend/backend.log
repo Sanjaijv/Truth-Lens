@@ -1,0 +1,54 @@
+Attempting MongoDB connection...
+MONGO_URI = mongodb+srv://sanjaijv:SANJAIJV2007sanjaijv2007@cluster1.roevhxa.mongodb.net/?appName=Cluster1
+Server is running on port 5001
+MongoDB Connected Successfully
+2025-12-21T12:14:29.049Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766319269075.mp4
+Reading video from: uploads/1766319269075.mp4
+Sending 1766319269075.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:17:44.828Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766319464836.mp4
+Reading video from: uploads/1766319464836.mp4
+Sending 1766319464836.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:18:29.387Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766319509392.mp4
+Reading video from: uploads/1766319509392.mp4
+Sending 1766319509392.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:24:12.468Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766319852474.mp4
+Reading video from: uploads/1766319852474.mp4
+Sending 1766319852474.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:24:32.207Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766319872210.mp4
+Reading video from: uploads/1766319872210.mp4
+Sending 1766319872210.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:33:01.510Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766320381511.mp4
+Reading video from: uploads/1766320381511.mp4
+Sending 1766320381511.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:36:27.887Z - POST /api/analyze
+Starting quick scan for Hailuo_Video_create a video of an angel fly_459126663427911682.mp4 at uploads/1766320587888.mp4
+Reading video from: uploads/1766320587888.mp4
+Sending 1766320587888.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:42:17.576Z - POST /api/analyze
+Starting quick scan for Hailuo_Video_create a video of an angel fly_459126663427911682.mp4 at uploads/1766320937578.mp4
+Reading video from: uploads/1766320937578.mp4
+Sending 1766320937578.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:49:02.557Z - POST /api/analyze
+Starting quick scan for Hailuo_Video_create a video of an angel fly_459126663427911682.mp4 at uploads/1766321342558.mp4
+Reading video from: uploads/1766321342558.mp4
+Sending 1766321342558.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully
+2025-12-21T12:49:19.649Z - POST /api/analyze
+Starting quick scan for 3195394-uhd_3840_2160_25fps.mp4 at uploads/1766321359650.mp4
+Reading video from: uploads/1766321359650.mp4
+Sending 1766321359650.mp4 to AI Model Service at http://localhost:5000/analyze-video
+AI analysis completed successfully

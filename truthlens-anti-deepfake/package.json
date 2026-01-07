@@ -1,0 +1,17 @@
+{
+    "name": "truthlens-root",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "dev:frontend": "cd frontend && npm run dev",
+        "dev:backend": "cd backend && node src/server.js",
+        "dev": "npm run dev:frontend",
+        "kill": "./kill-project.sh"
+    },
+    "devDependencies": {
+        "concurrently": "^8.2.2"
+    },
+    "dependencies": {
+        "next-auth": "^4.24.13"
+    }
+}

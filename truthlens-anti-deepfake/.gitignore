@@ -1,0 +1,37 @@
+# Node dependencies
+node_modules/
+**/node_modules/
+.next/
+out/
+build/
+
+# Python environment
+venv/
+.venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+ai-model-service/venv/
+
+# Data and Secrets
+backend/uploads/*.mp4
+backend/uploads/*.avi
+backend/uploads/*.mov
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# User-specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db

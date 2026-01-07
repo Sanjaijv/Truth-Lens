@@ -1,0 +1,56 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - detectify-net
+
+  ai-service:
+    build: ./ai-model-service
+    container_name: ai-service
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./backend/uploads:/backend/uploads
+    networks:
+      - detectify-net
+
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "5001:5001"
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/detectify
+      - AI_MODEL_SERVICE_URL=http://ai-service:5000
+      - PORT=5001
+    depends_on:
+      - mongodb
+      - ai-service
+    volumes:
+      - ./backend/uploads:/app/uploads
+    networks:
+      - detectify-net
+
+  frontend:
+    build: ./frontend
+    container_name: frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:5001
+    depends_on:
+      - backend
+    networks:
+      - detectify-net
+
+volumes:
+  mongodb_data:
+
+networks:
+  detectify-net:
+    driver: bridge
