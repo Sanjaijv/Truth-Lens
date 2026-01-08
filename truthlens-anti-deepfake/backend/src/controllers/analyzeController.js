@@ -24,7 +24,7 @@ export const analyzeVideo = async (req, res) => {
             scores: aiResult.scores,
             artifacts: aiResult.artifacts
         });
-        // await scanResult.save();
+        await scanResult.save();
 
         res.json({
             message: "Analysis complete",
