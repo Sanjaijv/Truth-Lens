@@ -3,3 +3,5 @@ werkzeug
 opencv-python-headless
 numpy
 tensorflow-cpu
+
+flask-cors

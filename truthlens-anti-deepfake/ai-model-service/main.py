@@ -1,5 +1,7 @@
 import os
+import base64
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import time
 import random
@@ -9,6 +11,7 @@ import tensorflow as tf
 from models.background_detector import BackgroundIrregularityDetector
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all domains to support browser extension
 UPLOAD_FOLDER = '../../backend/uploads'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -166,6 +169,48 @@ def analyze_video():
             "signatureMap": analysis_results["signatureMap"],
             "timestamp": time.time()
         })
+
+@app.route('/analyze-frame', methods=['POST'])
+def analyze_frame():
+    try:
+        data = request.json
+        if not data or 'image' not in data:
+            return jsonify({"error": "No image data provided"}), 400
+
+        # Decode base64 image
+        image_data = data['image'].split(',')[1] if ',' in data['image'] else data['image']
+        decoded_image = base64.b64decode(image_data)
+        
+        # Convert to numpy array for OpenCV
+        nparr = np.frombuffer(decoded_image, np.uint8)
+        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+
+        if frame is None:
+            return jsonify({"error": "Failed to decode image"}), 400
+
+        # Preprocess for Autoencoder
+        target_size = (224, 224)
+        resized_frame = cv2.resize(frame, target_size)
+        rgb_frame = cv2.cvtColor(resized_frame, cv2.COLOR_BGR2RGB)
+        normalized_frame = rgb_frame.astype(np.float32) / 255.0
+        
+        # Batch dimension
+        frames_batch = np.expand_dims(normalized_frame, axis=0)
+        
+        # Inference
+        authenticity_score, _ = analyze_frames_with_autoencoder(frames_batch, global_autoencoder_model)
+        
+        # Risk Score (0 = Safe, 1 = Fake)
+        risk_score = 1.0 - authenticity_score
+
+        return jsonify({
+            "risk_score": risk_score,
+            "timestamp": time.time()
+        })
+
+    except Exception as e:
+        print(f"Analyze Frame Error: {e}")
+        return jsonify({"error": str(e)}), 500
 
 @app.route('/train-model', methods=['POST'])
 def train_model():
